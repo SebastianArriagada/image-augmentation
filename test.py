@@ -1,6 +1,6 @@
 import numpy as np
-from flip import flipImage
-from drawBoxes  import drawBoxes
+from transformations.flip import flipImage
+from utils.drawBoxes  import drawBoxes
 from os import listdir
 import matplotlib.pyplot as plt
 
@@ -50,7 +50,7 @@ def flipTest(imagesList , imagesPath):
         titleList = ['Ground True', 'Horizomtal flip', 'Vertical flip',  'Both flip']
 
         plotImages(plotList, titleList)
-        
+
 
 imagesPath = "./test-images/"
 imagesList = [f for f in listdir(imagesPath) if (f.endswith('.png') or f.endswith('.jpg')) ]
