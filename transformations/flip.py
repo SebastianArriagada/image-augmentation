@@ -20,26 +20,12 @@ def flipLabel(x, y, flipCode):
         return x,y
 
 
-def flipImage(url, labels = None, flipCode = 2):
-    try:
-        image = cv2.imread(url)
-    except:
-        print("An error occurred while trying to load the image, url:", url)
+def flipImage(image, labels = None, flipCode = 2):
 
     new_labels = []
-    if labels:
-        
-        for label in labels:
-            try: 
-                len(label) == 5
-            except:
-                print("check the number of columns, input", label)
-            x = float(label[1])
-            y = float(label[2])
-            w = float(label[3])
-            h = float(label[4])
-            newX, newY = flipLabel(x , y, flipCode)
-            new_labels.append( [label[0], newX, newY , w, h] )
+    for label in labels:
+        newX, newY = flipLabel(label[1] , label[2], flipCode)
+        new_labels.append( [label[0], newX, newY , label[3], label[4]] )
         
     if flipCode in [-1,0,1]:
         flipedImage = cv2.flip(image, flipCode)
