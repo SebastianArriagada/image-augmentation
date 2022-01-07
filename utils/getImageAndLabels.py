@@ -33,6 +33,7 @@ def getImageAndLabels(image, imagesPath):
             len(label) == 5
         except:
             print("check the number of columns, input", label)
+            continue
         x = float(label[1])
         y = float(label[2])
         w = float(label[3])
