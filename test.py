@@ -2,6 +2,7 @@ import numpy as np
 from transformations.flip import flipImage
 from os import listdir
 from transformations.rotate import rotateImage
+from transformations.zoom import zoomImage
 from utils.drawBoxes import drawBoxes
 from utils.getImageAndLabels import getImageAndLabels
 from utils.plotImages import plotImages
@@ -52,12 +53,26 @@ def rotateFlipTest(image, labels):
 
     plotImages(plotList, titleList, len(flipCodes), len(rotateCodes))
 
+
+def zoomTest(image , labels):
+
+    img1 = drawBoxes(*zoomImage( image, labels, 1, 1.5))
+    img2 = drawBoxes(*zoomImage( image, labels, 1.5, 1))
+    img3 = drawBoxes(*zoomImage( image, labels, 2, 2))
+    imgT = drawBoxes(*zoomImage( image, labels, 1, 1))
+
+    plotList = [imgT, img1, img2, img3]
+    titleList = ['Ground True', 'W = 1, H = 1.5', 'W = 1.5, H = 1',  'W = 2, H = 2']
+
+    plotImages(plotList, titleList)
+
 imagesPath = "./test-images/"
 imagesList = [f for f in listdir(imagesPath) if (f.endswith('.png') or f.endswith('.jpg')) ]
 
 
 for image in imagesList:
-    image, new_labels = getImageAndLabels(image, imagesPath)
-    rotateTest(image, new_labels)
+    image, labels = getImageAndLabels(image, imagesPath)
+    #rotateTest(image, new_labels)
     #rotateFlipTest(image, new_labels)
-    
+    zoomTest( image, labels)
+        
